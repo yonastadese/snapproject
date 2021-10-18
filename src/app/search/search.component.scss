@@ -1,110 +1,96 @@
-.main{
-
-  display: grid;
-  height: 100%;
-  grid-template: 1fr/100%;
-  place-items: center;
+//Vars 
+:root {
+  --rad: .7rem;
+  --dur: .3s;
+  --color-dark: #2f2f2f;
+  --color-light: #fff;
+  --color-brand: #57bd84;
+  --font-fam: 'Lato', sans-serif;
+  --height: 5rem;
+  --btn-width: 6rem;
+  --bez: cubic-bezier(0, 0, 0.43, 1.49);
 }
 
-.Card {
-    padding: 1px;
-    border-radius: var(--border-radius);
-    background: linear-gradient(-67deg, rgba(#c8d8e7, .7), rgba(255,255,255,.8));
-    overflow: hidden;
-    box-shadow: 
-      -2px -2px 6px rgba(#fff, .6),
-      2px 2px 12px #c8d8e7;
-    width: 380px;
-  }
-  
-  .CardInner {
-    padding: 16px;
-    background-color: #e2e9f4;
-    border-radius: var(--border-radius);
-  }
-  
-  .container {
-    display: flex;
-  }
-  
-  .Icon {
-    min-width: 46px;
-    min-height: 46px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--border-radius);
-    margin-right: 12px;
-    box-shadow: 
-      -2px -2px 6px rgba(#fff, .6),
-      2px 2px 12px #c8d8e7;
-      
-    svg {
-      transform: translate(-1px, -1px);    
-    }
-  }
-  
-  .mat-label {
+// Setup
+body {background: var(--color-dark); display: flex; align-items: center; justify-content: center; min-height: 100vh }
+html { box-sizing: border-box; height: 100%; font-size: 10px; } *, *::before, *::after { box-sizing: inherit; }
+
+// Main styles
+form {
+  position: relative;
+  width: 30rem;
+  background: var(--color-brand);
+  border-radius: var(--rad);
+}
+input, button {
+  height: var(--height);
+  font-family: var(--font-fam);
+  border: 0;
+  color: var(--color-dark);
+  font-size: 1.8rem;
+}
+input[type="search"] {
+  outline: 0; // <-- shold probably remove this for better accessibility, adding for demo aesthetics for now.
+  width: 100%;
+  background: var(--color-light);
+  padding: 0 1.6rem;
+  border-radius: var(--rad);
+  appearance: none; //for iOS input[type="search"] roundedness issue. border-radius alone doesn't work
+  transition: all var(--dur) var(--bez);
+  transition-property: width, border-radius;
+  z-index: 1;
+  position: relative;
+}
+button {
+  display: none; // prevent being able to tab to it
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: var(--btn-width);
+  font-weight: bold;
+  background: var(--color-brand);
+  border-radius: 0 var(--rad) var(--rad) 0;
+}
+input:not(:placeholder-shown) {
+  border-radius: var(--rad) 0 0 var(--rad);
+  width: calc(100% - var(--btn-width));
+  + button {
     display: block;
-    color: #3c4b66;
-    margin-bottom: 12px;
-    background: linear-gradient(45deg, rgba(#6b7b8f, 1), #3c4b66);
-    -webkit-text-fill-color: transparent;
-    margin: 10%;
   }
-  
-  .InputContainer {
-    width: 100%;
+}
+label {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.example-card{
+  padding: 3%;
+  z-index: 0;
+  width: 500px;
+  display: flex;
+  margin-top: 13px;
+  left: 30%;
+  flex-wrap: wrap;
+  background-color: whitesmoke;
+  border-radius: 10px;
+  box-shadow: 5px 5px 30px 7px rgba(0,0,0,0.25), -5px -5px 30px 7px rgba(0,0,0,0.22);
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.example-card:hover {
+  transform: scale(0.9, 0.9);
+  box-shadow: 5px 5px 30px 15px rgba(0,0,0,0.25), 
+    -5px -5px 30px 15px rgba(0,0,0,0.22);
+}
+.mat-card-header{
+  color: #2f2f2f;
+  font-size: large;
+  span{
+    color: #57bd84;
   }
-  
-  input {
-    background-color: #e3edf7;
-    padding: 16px 32px;
-    border: none;
-    display: block;
-    font-family: 'Orbitron', sans-serif;
-    font-weight: 600;
-    color: #a9b8c9;
-    -webkit-appearance: none;
-    transition: all 240ms ease-out;
-    width: 100%;
-    
-    &::placeholder {
-      color: #6d7f8f;
-    }
-    
-    &:focus {
-      outline: none;
-      color: #6d7f8f;
-      background-color: lighten(#e3edf7, 3%);
-    }
-  };
-    
-  .InputContainer {
-    --top-shadow: inset 1px 1px 3px #c5d4e3, inset 2px 2px 6px #c5d4e3;
-    --bottom-shadow: inset -2px -2px 4px rgba(255,255,255, .7);
-    
-    position: relative;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    
-    &:before,
-    &:after {
-      left: 0;
-      top: 0;
-      display: block;
-      content: "";
-      pointer-events: none;
-      width: 100%;
-      height: 100%;
-      position: absolute;
-    }
-    
-    &:before {
-      box-shadow: var(--bottom-shadow);
-    }
-    
-    &:after {
-      box-shadow: var(--top-shadow);
-    }
-  }
+}

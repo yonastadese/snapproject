@@ -1,15 +1,55 @@
-<div class="main">
-  <div class="Card">
-    <div class="CardInner">
-    <mat-label> Enter Website URL</mat-label>
-    <div class="container">
-      <div class="Icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#657789" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-      </div>
-      <div class="InputContainer">
-        <input placeholder="Google.Com"/>
+<form onsubmit="event.preventDefault();" role="search">
+ 
+
+  <label for="search"> Enter Website URL</label>
+  <input #search type="search" placeholder="Type any url .." autofocus required />
+  <button type="submit" (click)="getValue(search.value)">Snap</button>    
+  
+
+    <!-- <mat-spinner *ngIf="showspinner"></mat-spinner> -->
+   
+  </form>
+  <!-- <div class="img-card">
+    <a href="">
+      <img class="small_image" src='{{display}}' >
+    </a>
+   </div> -->
+
+  <!-- <div class="cards-list" >
+  
+    <div class="card 1">
+      <div class="card_image"> <img src='{{display}}' /> </div>
+      <div class="card_title title-white">
+        <p>{{search.value}}</p>
       </div>
     </div>
-   </div>
-  </div>
-</div>
+    
+    </div> -->
+    <mat-card class="example-card"  *ngIf="isShown" id="divshow" >
+      <mat-card-header>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title><span > Screenshot of</span> {{search.value}}</mat-card-title>
+      </mat-card-header>
+      <a href='{{display}}' target="_blank" download="screenshot" >
+      <img mat-card-image src='{{display}}' alt="Photo of a Shiba Inu">
+    </a>
+   
+      <mat-card-content>
+        <p>jhekafsel;j.belfbauise</p>
+        <button >Download</button>
+      </mat-card-content>
+      <mat-card-actions>
+        
+        <button mat-button>SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+    
+    
+   
+ 
+
+
+
+
+
+
